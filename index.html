@@ -20,14 +20,13 @@
   ol{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:12px;counter-reset:p}
   li{background:#fff;color:#1E2B4A;border-radius:16px;padding:14px 16px 14px 56px;position:relative;counter-increment:p}
   li::before{content:counter(p);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;background:#1F8A5B;color:#fff;font-weight:700;display:grid;place-items:center}
-  li b{display:block;font-size:17px;margin-bottom:3px}
+  li>b{display:block;font-size:17px;margin-bottom:3px}
+  .os{display:block;margin-top:6px}
   li span{font-size:15px;color:#4A5570}
   .ico{display:inline-block;vertical-align:-4px;width:20px;height:20px;stroke:#1E2B4A;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .kbd{display:inline-block;background:#EEF1F4;border-radius:6px;padding:0 6px;font-weight:600;color:#1E2B4A}
   .nota{font-size:14px;opacity:.9;margin:18px 4px 0}
   a.ya{display:block;text-align:center;margin-top:18px;color:#fff;font-size:15px;opacity:.9}
-  .android{display:none}
-  .es-android .ios{display:none}.es-android .android{display:inline}
 </style>
 </head>
 <body>
@@ -36,8 +35,8 @@
 
   <ol>
     <li><b>Guárdala en tu pantalla de inicio</b>
-      <span class="ios">Abajo en Safari, toca <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg> <span class="kbd">Compartir</span>, baja y toca <span class="kbd">Agregar a inicio</span> → <span class="kbd">Agregar</span>.</span>
-      <span class="android">Toca el menú <span class="kbd">⋮</span> de Chrome y luego <span class="kbd">Agregar a pantalla principal</span>.</span>
+      <span class="os"><b>iPhone (Safari):</b> abajo toca <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg> <span class="kbd">Compartir</span>, baja y toca <span class="kbd">Agregar a inicio</span> → <span class="kbd">Agregar</span>.</span>
+      <span class="os"><b>Android (Chrome):</b> arriba a la derecha toca <span class="kbd">⋮</span> → <span class="kbd">Agregar a la pantalla principal</span> (o <span class="kbd">Instalar app</span>) → <span class="kbd">Agregar</span>.</span>
     </li>
     <li><b>Ábrela desde el ícono verde con la F</b>
       <span>Ya puedes cerrar esta página.</span>
@@ -46,7 +45,7 @@
       <span>Te salen pantallas de Google. Como la app está en <b>versión de prueba</b>, Google avisa que no la ha revisado; es normal.<br>
       ① En <i>"Google no verificó esta app"</i> toca <span class="kbd">Configuración avanzada</span> → <span class="kbd">Ir a diario finanzas (no seguro)</span>.<br>
       ② Marca <span class="kbd">Seleccionar todos</span> y toca <span class="kbd">Continuar</span>. Si dejas alguno sin marcar, la app no funciona.</span>
-      <span style="display:block;margin-top:8px;font-size:13px">Para qué es cada permiso: <b>Drive</b>, crear tu archivo "Mi Diario" y leer fotos de facturas · <b>Hojas de cálculo</b>, guardar tus gastos en ese archivo · <b>Servicio externo</b>, leer el texto de la foto.</span>
+      <span style="display:block;margin-top:8px;font-size:13px">Para qué es cada permiso: <b>Drive</b> (solo los archivos de esta app): crear tu archivo "Mi Diario", guardar ahí tus gastos y leer fotos de facturas · <b>Servicio externo</b>: leer el texto de la foto.</span>
     </li>
     <li><b>Responde las preguntas del inicio</b>
       <span>Unos 2 minutos. Puedes saltar lo que no quieras contestar.</span>
@@ -59,7 +58,6 @@
 <script>
   // Link para compartir: .../?nuevo  -> muestra la guía y deja la dirección limpia, que es la que se guarda en el ícono.
   // Desde el ícono (dirección limpia) -> entra directo al Diario.
-  if (/android/i.test(navigator.userAgent)) document.documentElement.className = 'es-android';
   const URL_APP = document.getElementById('ir').href;
   if (/nuevo/.test(location.search)) { history.replaceState(null, '', location.pathname); }
   else { location.replace(URL_APP); }
