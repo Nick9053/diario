@@ -10,24 +10,55 @@
 <meta name="apple-mobile-web-app-title" content="Diario Finanzas">
 <meta name="theme-color" content="#1F8A5B">
 <style>
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:#1F8A5B;color:#fff;font:17px/1.4 -apple-system,system-ui,sans-serif;text-align:center;padding:24px;box-sizing:border-box}
-  img{width:96px;height:96px;border-radius:22px}
-  a{display:inline-block;margin-top:18px;background:#fff;color:#1F8A5B;font-weight:700;padding:14px 22px;border-radius:14px;text-decoration:none}
-  p{opacity:.85;max-width:300px;margin:14px auto 0}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:#1F8A5B;color:#fff;font:17px/1.45 -apple-system,system-ui,sans-serif;padding:28px 18px 40px}
+  main{max-width:440px;margin:0 auto}
+  .top{display:flex;align-items:center;gap:14px}
+  .top img{width:64px;height:64px;border-radius:15px;flex:none}
+  h1{margin:0;font-size:26px;line-height:1.1}
+  .sub{opacity:.85;margin:4px 0 0;font-size:15px}
+  ol{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:12px;counter-reset:p}
+  li{background:#fff;color:#1E2B4A;border-radius:16px;padding:14px 16px 14px 56px;position:relative;counter-increment:p}
+  li::before{content:counter(p);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;background:#1F8A5B;color:#fff;font-weight:700;display:grid;place-items:center}
+  li b{display:block;font-size:17px;margin-bottom:3px}
+  li span{font-size:15px;color:#4A5570}
+  .ico{display:inline-block;vertical-align:-4px;width:20px;height:20px;stroke:#1E2B4A;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .kbd{display:inline-block;background:#EEF1F4;border-radius:6px;padding:0 6px;font-weight:600;color:#1E2B4A}
+  .nota{font-size:14px;opacity:.9;margin:18px 4px 0}
+  a.ya{display:block;text-align:center;margin-top:18px;color:#fff;font-size:15px;opacity:.9}
+  .android{display:none}
+  .es-android .ios{display:none}.es-android .android{display:inline}
 </style>
 </head>
 <body>
 <main>
-  <img src="icono-512.png" alt="">
-  <h1 style="margin:14px 0 0">Diario Finanzas</h1>
-  <a id="ir" href="https://script.google.com/macros/s/AKfycbyr6FJR5ajNrxKjDMd1qB5INGwvK-dvGLn0VF800DmY3aP2RQb0O1y8oCoLkpCjwWDgQg/exec">Abrir mi Diario</a>
-  <p id="tip" hidden>Para tenerla como app: toca Compartir y luego "Agregar a inicio". Después ábrela desde el ícono.</p>
+  <div class="top"><img src="icono-512.png" alt=""><div><h1>Diario Finanzas</h1><p class="sub">Tus gastos, en tu propio Google Drive.</p></div></div>
+
+  <ol>
+    <li><b>Guárdala en tu pantalla de inicio</b>
+      <span class="ios">Abajo en Safari, toca <svg class="ico" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M5 11v9h14v-9"/></svg> <span class="kbd">Compartir</span>, baja y toca <span class="kbd">Agregar a inicio</span> → <span class="kbd">Agregar</span>.</span>
+      <span class="android">Toca el menú <span class="kbd">⋮</span> de Chrome y luego <span class="kbd">Agregar a pantalla principal</span>.</span>
+    </li>
+    <li><b>Ábrela desde el ícono verde con la F</b>
+      <span>Ya puedes cerrar esta página.</span>
+    </li>
+    <li><b>Autoriza con tu Gmail (solo la primera vez)</b>
+      <span>Google dirá <i>"Google no verificó esta app"</i> porque está en pruebas. Toca <span class="kbd">Configuración avanzada</span> → <span class="kbd">Ir a Diario</span> → <span class="kbd">Permitir</span>.</span>
+    </li>
+    <li><b>Responde las preguntas del inicio</b>
+      <span>Unos 2 minutos. Puedes saltar lo que no quieras contestar.</span>
+    </li>
+  </ol>
+
+  <p class="nota">🔒 Tu información se guarda en un archivo "Mi Diario" en <b>tu</b> Google Drive. Nadie más la ve, tampoco quien te invitó.</p>
+  <a class="ya" id="ir" href="https://script.google.com/macros/s/AKfycbyr6FJR5ajNrxKjDMd1qB5INGwvK-dvGLn0VF800DmY3aP2RQb0O1y8oCoLkpCjwWDgQg/exec">Prefiero abrirla sin guardarla →</a>
 </main>
 <script>
-  // Link para compartir: .../?nuevo  -> muestra cómo agregarla y deja la dirección limpia para el ícono.
+  // Link para compartir: .../?nuevo  -> muestra la guía y deja la dirección limpia, que es la que se guarda en el ícono.
   // Desde el ícono (dirección limpia) -> entra directo al Diario.
+  if (/android/i.test(navigator.userAgent)) document.documentElement.className = 'es-android';
   const URL_APP = document.getElementById('ir').href;
-  if (/nuevo/.test(location.search)) { document.getElementById('tip').hidden = false; history.replaceState(null, '', location.pathname); }
+  if (/nuevo/.test(location.search)) { history.replaceState(null, '', location.pathname); }
   else { location.replace(URL_APP); }
 </script>
 </body>
